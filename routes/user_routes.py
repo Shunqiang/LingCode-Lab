@@ -24,3 +24,7 @@ def get_article_page(article_id):
     if  article:
         return render_template('article.html', article=article)
     abort(404)
+
+@app.route('/login.html')
+def login_page():
+    return 'login page'
