@@ -16,6 +16,11 @@
         <a href="/about">about</a>
         <a href="{{url_for('create_article')}}">aricle</a>
     </div>
+    {% if current_user.is_authenticated %}
+    <div>welcome {{current_user.username}}</div>
+    {% else %}
+    <a href="{{ url_for('login_page') }}">去登录</a>
+    {% endif %}
     {% block content %}
     {% endblock %}
 </body>

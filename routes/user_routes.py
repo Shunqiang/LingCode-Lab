@@ -1,7 +1,8 @@
 from routes import  app
-from flask import abort, render_template
+from flask import abort, flash, redirect, render_template, url_for
 from services.article_service import ArticleService
-
+from forms.login_form import LoginForm
+from services.user_service import UserService
 @app.route('/')
 @app.route('/index.html')
 def home_page():
@@ -25,6 +26,15 @@ def get_article_page(article_id):
         return render_template('article.html', article=article)
     abort(404)
 
-@app.route('/login.html')
+@app.route('/login.html', methods=['POST', 'GET'])
 def login_page():
-    return 'login page'
+    form = LoginForm()
+    if form.validate_on_submit():
+        result = UserService().do_login(username=form.username.data, password=form.password.data)
+        if result:
+            flash(f'欢迎回来', category='success')
+            return redirect(url_for('home_page'))
+        else:
+            flash(f'账号密码错误', category='danger')
+            
+    return render_template('login.html', form=form)
