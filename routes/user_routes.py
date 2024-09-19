@@ -1,3 +1,4 @@
+from flask_login import logout_user
 from routes import  app
 from flask import abort, flash, redirect, render_template, url_for
 from services.article_service import ArticleService
@@ -38,3 +39,8 @@ def login_page():
             flash(f'账号密码错误', category='danger')
             
     return render_template('login.html', form=form)
+
+@app.route('/logout.html')
+def logout_page():
+    logout_user()
+    return redirect(url_for('home_page'))

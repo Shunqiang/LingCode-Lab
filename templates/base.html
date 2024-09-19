@@ -18,6 +18,7 @@
     </div>
     {% if current_user.is_authenticated %}
     <div>welcome {{current_user.username}}</div>
+    <a href="{{ url_for('logout_page') }}">登出</a>
     {% else %}
     <a href="{{ url_for('login_page') }}">去登录</a>
     {% endif %}
