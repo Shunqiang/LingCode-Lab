@@ -5,10 +5,25 @@
 {% endblock %}
 
 {% block content %}
+<ul>
+    {% for message in get_flashed_messages() %}
+    <li>{{ message }}</li>
+    {% else %}
+    <li>No messages.</li>
+    {% endfor %}
+</ul>
+
 <div>
     <form method="post">
         {{ form.hidden_tag() }}
-        <h1>添加新文章</h1>
+        <h1>
+            {% if is_edit %}
+            编辑
+            {% else %}
+            新增
+            {% endif %}
+            新文章
+        </h1>
         <br />
         {{ form.title.label()}}
         {{ form.title(placeholder="输入文章内容") }}

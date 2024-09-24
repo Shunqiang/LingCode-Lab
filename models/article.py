@@ -9,7 +9,7 @@ class Article(db.Model):
     title: Mapped[str] = mapped_column(String(255), nullable=False)
     __content: Mapped[bytes] = mapped_column(BLOB, name='content', nullable=False)
     create_time: Mapped[datetime] = mapped_column(TIMESTAMP, nullable=False,default=func.now())
-    
+    update_time: Mapped[datetime] = mapped_column(TIMESTAMP, nullable=False,default=func.now())
     @property
     def content(self):
         return self.__content.decode('utf-8')
