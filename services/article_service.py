@@ -39,5 +39,13 @@ class ArticleService:
         db.session.commit()
         
         return article, None
+    def delete_article(self, article_id: int):
+        article = db.session.get(Article, article_id)
+        if article:
+            db.session.delete(article)
+            db.session.commit()
+            return True, None
+        else:
+            return False, '文章不存在'
     
     

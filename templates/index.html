@@ -11,10 +11,16 @@
         <th>时间</th>
     </tr>
     {% for article in articles %}
+    {% if current_user.is_authenticated %}
+    {% include 'includes/article_modal.html' %}
+    {% endif %}
     <tr>
         <td><a href="/article/{{article.id}}.html">{{article.title}}</a></td>
         <td>{{article.create_time}}</td>
+        {% if current_user.is_authenticated %}
         <td><a href="/editarticle/{{ article.id }}.html">编辑</a></td>
+        <td><a href="javascript;">删除</a></td>
+        {% endif %}
     </tr>
     {% endfor %}
 </table>

@@ -1,0 +1,10 @@
+<div>
+    <form method="POST">
+        {{delete_article_form.csrf_token()}}
+        {{delete_article_form.article_id(value=article.id)}}
+        <div>
+            <h4>确定要删除{{article.title}}</h4>
+        </div>
+        {{delete_article_form.submit()}}
+    </form>
+</div>
